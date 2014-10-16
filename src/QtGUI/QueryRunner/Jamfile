@@ -1,0 +1,5 @@
+lib QueryRunner
+	: QueryRunner.cpp
+	: <include>.
+	: <link>static
+	;

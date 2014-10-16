@@ -1,0 +1,32 @@
+project
+	: requirements <include>/usr/local/qt/include <include>/home/martin/MothDB/src
+	;
+
+lib QtCore
+	:
+	: <file>/usr/local/qt/lib/libQtCore.so
+	;
+
+lib QtGui
+	:
+	: <file>/usr/local/qt/lib/libQtGui.so
+	;
+
+lib QtSql
+	:
+	: <file>/usr/local/qt/lib/libQtSql.so
+	;
+
+exe MothDB 
+	: main.cpp 
+	  QtGUI//gui
+	  QtGUI/CommonActions//CommonActions
+	  QtGUI/Dialogs//Dialogs
+	  QtGUI/QueriesSheet//QueriesSheet
+	  QtGUI/QueryRunner//QueryRunner
+	  QtGUI/TableDataView//TableDataView
+	  QtGUI/TablesView//TablesView
+	  QtCore
+	  QtGui
+	  QtSql
+	;

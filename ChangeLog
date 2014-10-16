@@ -1,0 +1,45 @@
+29/10/06 - M. Waller - Began initial setup of code structure. Added main.cpp,
+/MainWin/MainWindow.cpp and /MainWin/MainWindow.hpp (for library libMainWin.a).
+Added configure.ac, and Makefile.ams in root, /src and /src/MainWin.
+Also aded utility script 'autotools.sh' to perform aclocal, configure and
+automake -a
+
+13/11/06 - M. Waller - Added menua bar and filemenu with open, new and exit
+entries. Connected exit entry - not open or new. Mainwindow construction via 
+init not exception safe - can change to use RIAI to make it thus.
+
+20/11/06 - M. Waller - Implemented boost::shared_ptr to make constructor
+exception safe when creating children of mainwindow
+
+21/11/06 - M. Waller - Added slot for creating new dockwidget
+
+3/12/06 - M. Waller - Implemented first prototype for slot that creates new
+dockwidget.  Implemented first prototype for slot that opens existing file.
+
+29/01/07 - M. Waller - child objects are 'owned' by parent objects in qt model,
+so disabled shared_ptr implementation (caused seg fault on exit). Changed to use
+'simple' mdi for child windows as dock widget window implementation unsatisfactory
+
+01/02/07 - M. Waller - started adding save functionality. Now file open not
+working properly (silly min-scrollbar window opens instead of normal QTextEdit.
+
+10/02/07 - Added save functionality, corrected file opening issue alluded to in enrty
+for 01/02/07
+
+15/02/07 - allowed mulitple file open at once, implemented save last open file path (so file
+open dialog reopens at last dir used to open a file)
+
+22/02/07 - Implemented first attempt withdefault syntax highlighting plagiarised from qt
+example
+
+27/2/07 - Small modifications of syntax highlighting - added all c++ keywords
+and added (all?) preporcessor # directives
+
+12/03/07 - implemented file | saveAll
+
+13/03/07 - implemented undo (via ctrl-z) - redo not working (used Qt's QTextEdit methods -
+redo (via ctrl-y) not working I don't understand
+
+22/03/07 - added edit menu and added placeholders for edit|find and edit|gotoline num
+
+20/5/07 - added ability to load files from command line (for association etc)

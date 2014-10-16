@@ -1,0 +1,60 @@
+#include <NewRecordDlg.hpp>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QPushButton>
+#include <QtGui/QDateEdit>
+#include <QtGui/QGroupBox>
+#include <QtGui/QLineEdit>
+#include <QtGui/QLabel>
+#include <QtGui/QCheckBox>
+
+#include <iostream>
+
+using namespace std;
+
+NewRecordDlg::NewRecordDlg(QWidget *parent, Qt::WindowFlags f)
+:QDialog(parent,f)
+{
+
+    setWindowTitle(QString("Add New Record"));
+
+    addBut=new QPushButton("Commit to database");
+    connect(addBut, SIGNAL(clicked()),this,SLOT(commit()));
+    cancelBut=new QPushButton("Cancel");
+    connect(cancelBut,SIGNAL(clicked()),this,SLOT(reject()));
+
+    //Now set up widgets in s eries of layouts/groupboxes:
+    QVBoxLayout *topLayout = new QVBoxLayout(this);
+
+    QGroupBox *recEventData = new QGroupBox(QString("Record Event"),this);
+    QVBoxLayout *recDatLayout = new QVBoxLayout();
+    useAsCurrent= new QCheckBox(tr("Keep as current"));
+    recDateLbl = new QLabel(tr("Record Date"));
+    recDateTxt = new QDateEdit((QDate::currentDate()).addDays(-1));
+    gridRefLbl =new QLabel(tr("Gird ref."));
+    gridRefTxt  = new QLineEdit("SU993553");
+    recNotesBut=new QPushButton(tr("Record notes..."));
+    
+    recDatLayout->addWidget(useAsCurrent);
+    recDatLayout->addWidget(recDateLbl);
+    recDatLayout->addWidget(recDateTxt);
+    recDatLayout->addWidget(gridRefLbl);
+    recDatLayout->addWidget(gridRefTxt);
+
+    recEventData->setLayout(recDatLayout);
+    
+    QHBoxLayout *butLayout = new QHBoxLayout();
+    butLayout->addWidget(addBut);
+    butLayout->addWidget(cancelBut);
+
+    topLayout->addWidget(recEventData);
+    topLayout->addWidget(recNotesBut);
+    topLayout->addLayout(butLayout);
+
+}
+
+void NewRecordDlg::commit()
+{
+    cout << "Commit record here" << endl;
+    accept();
+}

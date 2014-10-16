@@ -1,0 +1,6 @@
+lib TableDataView
+	: TableDataWidget.cpp moc_TableDataWidget.cpp
+	: <include>.
+	: <link>static
+	;
+	

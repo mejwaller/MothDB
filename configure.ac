@@ -1,0 +1,17 @@
+AC_INIT(MothDB,0.1,martinej.waller@ntlworld.com)
+AM_INIT_AUTOMAKE([-Wall])
+AC_PROG_RANLIB
+AC_PROG_CXX
+AC_CONFIG_FILES([
+ Makefile
+ src/Makefile
+ src/QtGUI/Makefile
+ src/QtGUI/Dialogs/Makefile
+ src/QtGUI/TablesView/Makefile
+ src/QtGUI/TreeViewItems/Makefile
+ src/QtGUI/QueriesSheet/Makefile
+ src/QtGUI/TableDataView/Makefile
+ src/QtGUI/CommonActions/Makefile
+ src/QtGUI/QueryRunner/Makefile
+])
+AC_OUTPUT

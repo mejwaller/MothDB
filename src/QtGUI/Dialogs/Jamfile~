@@ -1,0 +1,10 @@
+lib Dialogs
+	: ConnectDlg.cpp 
+	  moc_ConnectDlg.cpp 
+	  #NewRecordDlg.cpp 
+	  #moc_NewRecordDlg.cpp
+	  NewRecordWzd.cpp
+	  moc_NewRecordWzd.cpp
+	: <include>.
+	: <link>static
+	;

@@ -1,0 +1,5 @@
+lib TreeViewItems
+	: TreeViewItem.cpp
+	: <include>.
+	: <link>static
+	;

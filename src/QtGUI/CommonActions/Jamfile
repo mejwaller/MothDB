@@ -1,0 +1,10 @@
+lib CommonActions
+	: CommonActions.cpp 
+	  moc_CommonActions.cpp
+	  #NewRecordDlg.cpp
+	  #moc_NewRecordDlg.cpp
+	  #NewRecordWzd.cpp
+	  #moc_NewRecordWzd.cpp
+	: <include>.
+	: <link>static
+	;

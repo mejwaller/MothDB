@@ -1,0 +1,5 @@
+lib Record
+	:EventRecord.cpp
+	: <include>
+	: <link>static
+	;

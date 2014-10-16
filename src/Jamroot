@@ -1,0 +1,34 @@
+project
+	: requirements <include>/usr/local/qt/include <include>/home/mwaller/papilio_progs/MothDB/src
+	;
+
+lib QtCore
+	:
+	: <file>/usr/local/qt/lib/libQtCore.so.4
+	;
+
+lib QtGui
+	:
+	: <file>/usr/local/qt/lib/libQtGui.so.4
+	;
+
+lib QtSql
+	:
+	: <file>/usr/local/qt/lib/libQtSql.so.4
+	;
+
+exe MothDB 
+	: main.cpp 
+	  Record//Record
+	  QtGUI//gui
+	  QtGUI/CommonActions//CommonActions
+	  QtGUI/Dialogs//Dialogs
+	  QtGUI/QueriesSheet//QueriesSheet
+	  QtGUI/QueryRunner//QueryRunner
+	  QtGUI/TableDataView//TableDataView
+	  QtGUI/TablesView//TablesView
+	  QtGUI/TreeViewItems//TreeViewItems
+	  QtCore
+	  QtGui
+	  QtSql
+	;

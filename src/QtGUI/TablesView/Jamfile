@@ -1,0 +1,5 @@
+lib TablesView
+	: TableListModel.cpp moc_TableListModel.cpp
+	: <include>.
+	: <link>static
+	;

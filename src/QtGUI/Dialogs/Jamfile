@@ -1,0 +1,12 @@
+lib Dialogs
+	: ConnectDlg.cpp 
+	  moc_ConnectDlg.cpp 
+	  NewRecordDlg.cpp 
+	  moc_NewRecordDlg.cpp
+	  NewRecEventDlg.cpp
+	  moc_NewRecEventDlg.cpp
+	  RecEventNotesDlg.cpp
+	  moc_RecEventNotesDlg.cpp
+	: <include>.
+	: <link>static
+	;

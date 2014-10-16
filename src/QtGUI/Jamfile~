@@ -1,0 +1,4 @@
+lib gui
+	: MainWin.cpp moc_MainWin.cpp 
+	: <include>.
+	;
