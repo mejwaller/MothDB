@@ -16,20 +16,33 @@ class Application(tk.Frame):
         #self.rowconfigure(1, weight=1)           
         self.columnconfigure(0, weight=1)
         
-        self.dbNameLbl = tk.Label(self,text="database:")
-        self.dbNameLbl.grid(row=0,column=0,sticky=tk.N+tk.S+tk.E+tk.W)       
+        self.hstNameLbl = tk.Label(self,text="Hostname:")
+        self.hstNameLbl.grid(row=0,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
+        self.hstNameInp = tk.Entry(self)
+        self.hstNameInp.grid(row=0,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
+        
+        self.dbNameLbl = tk.Label(self,text="Database:")
+        self.dbNameLbl.grid(row=1,column=0,sticky=tk.N+tk.S+tk.E+tk.W)       
         self.dbNameInp = tk.Entry(self)
-        self.dbNameInp.grid(row=0,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
+        self.dbNameInp.grid(row=1,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
-        self.usrNameLbl = tk.Label(self,text="user name:")
-        self.usrNameLbl.grid(row=1,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
+        self.usrNameLbl = tk.Label(self,text="User Name:")
+        self.usrNameLbl.grid(row=2,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
         self.usrNameInp = tk.Entry(self)
-        self.usrNameInp.grid(row=1,column=1,sticky=tk.N+tk.S+tk.E+tk.W) 
+        self.usrNameInp.grid(row=2,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
+        self.psswdLbl = tk.Label(self,text="Password:")
+        self.psswdLbl.grid(row=3,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
+        self.psswdInp = tk.Entry(self)
+        self.psswdInp.grid(row=3,column=1,sticky=tk.N+tk.S+tk.E+tk.W) 
+        
+        self.okButton = tk.Button(self, text='OK',
+            command=self.quit)            
+        self.okButton.grid(row=4,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
         
         self.quitButton = tk.Button(self, text='Quit',
             command=self.quit)            
-        self.quitButton.grid(row=4,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
+        self.quitButton.grid(row=4,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
         #self.sillyButton = tk.Button(self, text='Silly')
         #self.sillyButton.grid(row=1, column=0,sticky=tk.N+tk.S+tk.E+tk.W)
