@@ -1,53 +1,84 @@
 #!/usr/bin/env python      
-import Tkinter as tk       
+import Tkinter as tk   
+import MyDialog as d    
 
 class Application(tk.Frame):              
-    def __init__(self, master=None):
-        tk.Frame.__init__(self, master)   
-        self.grid(sticky=tk.N+tk.S+tk.E+tk.W)                       
-        self.createWidgets()
-
-    def createWidgets(self):
-        top=self.winfo_toplevel()                
-        top.rowconfigure(0, weight=1) 
-        top.rowconfigure(1, weight=1)           
-        top.columnconfigure(0, weight=1)         
-        #self.rowconfigure(0, weight=1)
-        #self.rowconfigure(1, weight=1)           
-        self.columnconfigure(0, weight=1)
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.parent = master
+        self.constructUI()
         
-        self.hstNameLbl = tk.Label(self,text="Hostname:")
+    def constructUI(self):
+        self.parent.title("Moth records database")  
+        menuBar = tk.Menu(self.parent)
+        self.parent.config(menu=menuBar) 
+        
+        fileMenu = tk.Menu(menuBar)
+        fileMenu.add_command(label="Connect...", command=self.onConnectCmd)
+        fileMenu.add_command(label="Quit", command=self.onExit)
+        
+        menuBar.add_cascade(label="File", menu=fileMenu)
+                
+        
+    def onConnectCmd(self):
+        dlg = ConnectDlg(self)
+     
+    def onExit(self):
+        self.quit()                
+
+class ConnectDlg(d.MyDialog):
+    
+    def abody(self, master):
+
+        tk.Label(master, text="First:").grid(row=0)
+        tk.Label(master, text="Second:").grid(row=1)
+
+        self.e1 = tk.Entry(master)
+        self.e2 = tk.Entry(master)
+
+        self.e1.grid(row=0, column=1)
+        self.e2.grid(row=1, column=1)
+        return self.e1 # initial focus
+
+   #def apply(self):
+   #     first = int(self.e1.get())
+   #     second = int(self.e2.get())
+   #     print first, second # or something
+        
+    def body(self,master):        
+        self.hstNameLbl = tk.Label(master,text="Hostname:")
         self.hstNameLbl.grid(row=0,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
-        self.hstNameInp = tk.Entry(self)
+        self.hstNameInp = tk.Entry(master)
+        self.hstNameInp.insert(0,"localhost")
         self.hstNameInp.grid(row=0,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
-        self.dbNameLbl = tk.Label(self,text="Database:")
+        self.dbNameLbl = tk.Label(master,text="Database:")
         self.dbNameLbl.grid(row=1,column=0,sticky=tk.N+tk.S+tk.E+tk.W)       
-        self.dbNameInp = tk.Entry(self)
+        self.dbNameInp = tk.Entry(master)
+        self.dbNameInp.insert(0,"mothrecs")
         self.dbNameInp.grid(row=1,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
-        self.usrNameLbl = tk.Label(self,text="User Name:")
+        self.usrNameLbl = tk.Label(master,text="User Name:")
         self.usrNameLbl.grid(row=2,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
-        self.usrNameInp = tk.Entry(self)
+        self.usrNameInp = tk.Entry(master)
+        self.usrNameInp.insert(0,"martin")
         self.usrNameInp.grid(row=2,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
-        self.psswdLbl = tk.Label(self,text="Password:")
+        self.psswdLbl = tk.Label(master,text="Password:")
         self.psswdLbl.grid(row=3,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
-        self.psswdInp = tk.Entry(self)
+        self.psswdInp = tk.Entry(master,show="*")
         self.psswdInp.grid(row=3,column=1,sticky=tk.N+tk.S+tk.E+tk.W) 
         
-        self.okButton = tk.Button(self, text='OK',
-            command=self.quit)            
-        self.okButton.grid(row=4,column=0,sticky=tk.N+tk.S+tk.E+tk.W)
+        return self.psswdInp#initial focus
         
-        self.quitButton = tk.Button(self, text='Quit',
-            command=self.quit)            
-        self.quitButton.grid(row=4,column=1,sticky=tk.N+tk.S+tk.E+tk.W)
         
-        #self.sillyButton = tk.Button(self, text='Silly')
-        #self.sillyButton.grid(row=1, column=0,sticky=tk.N+tk.S+tk.E+tk.W)
-                    
+     
 
-app = Application()                       
-app.master.title('Sample application')    
-app.mainloop()                        
+
+#app = Application()                       
+#app.master.title('Sample application')    
+#app.mainloop() 
+
+root = tk.Tk()
+app = Application(root)    
+root.mainloop()                   
