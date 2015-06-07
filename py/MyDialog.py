@@ -1,3 +1,5 @@
+#from http://www.effbot.org/tkinterbook/tkinter-dialog-windows.htm
+
 from Tkinter import *
 import os
 
