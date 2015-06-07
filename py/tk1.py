@@ -1,11 +1,15 @@
 #!/usr/bin/env python      
 import Tkinter as tk   
-import MyDialog as d    
+import MyDialog as d 
+import mysql.connector  
+from mysql.connector import Error
+import tkMessageBox
 
 class Application(tk.Frame):              
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.parent = master
+        self.connect = False
         self.constructUI()
         
     def constructUI(self):
@@ -22,28 +26,46 @@ class Application(tk.Frame):
         
     def onConnectCmd(self):
         dlg = ConnectDlg(self)
-     
+        params = dlg.result
+        #print params
+        
+        #see e.g. http://www.mysqltutorial.org/python-mysql/
+        try:
+            self.cnx = mysql.connector.connect(user=params[2],password=params[3],
+                              host=params[0],
+                              database=params[1])
+            self.connected = True
+            
+            #curA = self.cnx.cursor()
+
+            #showtables = ("SHOW TABLES")
+
+            #curA.execute(showtables)
+
+            #print curA.fetchall()
+
+            #curA.close()
+            
+            #self.cnx.close
+        
+        except Error as e: 
+                tkMessageBox.showerror(
+                "Database connect",
+                "Cannot connect to database %s - error: %s" % (params[1], e))
+                             
+           
     def onExit(self):
         self.quit()                
 
 class ConnectDlg(d.MyDialog):
     
-    def abody(self, master):
-
-        tk.Label(master, text="First:").grid(row=0)
-        tk.Label(master, text="Second:").grid(row=1)
-
-        self.e1 = tk.Entry(master)
-        self.e2 = tk.Entry(master)
-
-        self.e1.grid(row=0, column=1)
-        self.e2.grid(row=1, column=1)
-        return self.e1 # initial focus
-
-   #def apply(self):
-   #     first = int(self.e1.get())
-   #     second = int(self.e2.get())
-   #     print first, second # or something
+    def apply(self):
+        hostname = self.hstNameInp.get()
+        dbName = self.dbNameInp.get()
+        userName = self.usrNameInp.get()
+        passwd = self.psswdInp.get()
+        
+        self.result = hostname,dbName,userName,passwd
         
     def body(self,master):        
         self.hstNameLbl = tk.Label(master,text="Hostname:")
